@@ -79,20 +79,6 @@ export const ForYou = () => {
           onPress={() => {}}
         />
         <Mixes list={PLAYLISTS} />
-        <View style={{height: 100}}>
-          <TouchableOpacity>
-            <Text style={{color: '#fff'}}>AAAAAAA</Text>
-          </TouchableOpacity>
-        </View>
-        <BottomSheet
-          ref={bottomSheetRef}
-          index={1}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}>
-          <View style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
-          </View>
-        </BottomSheet>
       </ScrollView>
     </SafeAreaView>
   );

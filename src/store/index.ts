@@ -1,8 +1,10 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import AuthReducer from './reducers/auth';
+import PlayerReducer from './reducers/player';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
+  player: PlayerReducer,
 });
 
 export const store = configureStore({

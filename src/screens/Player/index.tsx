@@ -133,7 +133,7 @@ export const Player = () => {
               navigation.goBack();
               navigation.goBack();
             }}>
-            <Image source={require('../../assets/icons/back.png')} />
+            <Image source={require('../../assets/icons/next.png')} />
           </TouchableOpacity>
           <Image
             source={require('../../assets/icons/more_vert.png')}

@@ -11,8 +11,12 @@ import {
   FlatList,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useDispatch} from 'react-redux';
+import {setSongId} from 'store/reducers/player';
 
 export const SearchTab = () => {
+  //Đầu tiên phải khai báo dispatch
+  const dispatch = useDispatch();
   const [searchText, setSearchText] = useState('');
   const filterSongs = () => {
     return LIST_SONG.filter(song =>
@@ -20,6 +24,12 @@ export const SearchTab = () => {
     );
   };
   const navigation = useNavigation();
+
+  const onPressItem = (id: string) => {
+    dispatch(setSongId({id, isMini: false}));
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flexDirection: 'row'}}>
@@ -54,7 +64,7 @@ export const SearchTab = () => {
           return (
             <TouchableOpacity
               key={item.id}
-              onPress={() => navigation.navigate('Player', {songId: item.id})}>
+              onPress={() => onPressItem(item.id)}>
               <View style={styles.BoxListSong}>
                 <Image source={item.image} style={styles.image} />
                 <View style={styles.textContainer}>

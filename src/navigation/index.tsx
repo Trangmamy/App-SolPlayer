@@ -6,7 +6,7 @@ import {YourLibraryScr} from '../YourLibrary';
 import {SignUpScreen} from '../screens/SignUp';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
-import {Image, StatusBar, Text, View} from 'react-native';
+import {View} from 'react-native';
 import {DemoTab} from 'screens/DemoTab';
 import {SearchTab} from 'screens/Search/SearchTab';
 import {LikeSong} from 'src/YourLibrary/components/likeSong';
@@ -18,17 +18,14 @@ import {Player} from 'screens/Player';
 import {MyProfile} from 'screens/MyProfile';
 import {Modalize} from 'react-native-modalize';
 import {useEffect, useRef} from 'react';
-import Entypo from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Iconlibrary from 'react-native-vector-icons/MaterialIcons';
-import {MiniPlayer} from 'components/MiniPlayer';
-import {TestBottom} from 'components/MiniPlayer/TestBottom';
+import {CustomBottom} from 'components/CustomBottom';
+import {MiniPlayer} from 'components/Player';
+import {MiniPlayer2} from 'components/MiniPlayer2';
 
 const Stack = createNativeStackNavigator();
 
 export const Router = () => {
   const {isLogin} = useSelector((state: RootState) => state.auth);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LoginScreen">
@@ -51,73 +48,26 @@ export const Router = () => {
   );
 };
 const Tab = createBottomTabNavigator();
+
 const TabBottom = () => {
+  const modalizeRef = useRef<Modalize>();
+
+  useEffect(() => {
+    modalizeRef.current?.open();
+  }, []);
+
   return (
-    <>
+    <View style={{flex: 1}}>
       <Tab.Navigator
-        screenOptions={{
-          tabBarStyle: {
-            backgroundColor: '#000',
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            shadowOpacity: 4,
-            shadowRadius: 4,
-            elevation: 4,
-            shadowOffset: {
-              width: 0,
-              height: -4,
-            },
-            borderTopWidth: 0,
-          },
-        }}>
-        <Tab.Screen
-          name="Home"
-          component={DemoTab}
-          navigationKey="aa"
-          options={{
-            headerShown: false,
-            tabBarLabelStyle: {color: 'white'},
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Entypo name="home-variant" size={24} color="white" />
-              ) : (
-                <Entypo name="home-variant-outline" size={24} color="gray" />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Search"
-          component={SearchScreen}
-          options={{
-            headerShown: false,
-            tabBarLabelStyle: {color: 'white'},
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Ionicons name="search" size={24} color="white" />
-              ) : (
-                <Ionicons name="search" size={24} color="gray" />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="YourLibrary"
-          component={YourLibraryScr}
-          options={{
-            headerShown: false,
-            tabBarLabelStyle: {color: 'white'},
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Iconlibrary name="library-music" size={24} color="white" />
-              ) : (
-                <Iconlibrary name="library-music" size={24} color="gray" />
-              ),
-          }}
-        />
+        screenOptions={{headerShown: false}}
+        tabBar={props => <CustomBottom {...props} />}>
+        <Tab.Screen name="Home" component={DemoTab} navigationKey="aa" />
+        <Tab.Screen name="Search" component={SearchScreen} />
+        <Tab.Screen name="YourLibrary" component={YourLibraryScr} />
       </Tab.Navigator>
       {/* <MiniPlayer /> */}
-    </>
+      <MiniPlayer2 />
+    </View>
   );
 };
 

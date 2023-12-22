@@ -9,15 +9,15 @@ import {PortalProvider} from '@gorhom/portal';
 
 export default () => {
   return (
-    <PortalProvider>
-      <SafeAreaProvider style={{flex: 1, backgroundColor: '#FCFCFC'}}>
-        <Provider store={store}>
+    <SafeAreaProvider style={{flex: 1, backgroundColor: '#FCFCFC'}}>
+      <Provider store={store}>
+        <PortalProvider>
           <GestureHandlerRootView style={{flex: 1}}>
             <Router />
           </GestureHandlerRootView>
-        </Provider>
-      </SafeAreaProvider>
-    </PortalProvider>
+        </PortalProvider>
+      </Provider>
+    </SafeAreaProvider>
   );
 };
 const styles = StyleSheet.create({
